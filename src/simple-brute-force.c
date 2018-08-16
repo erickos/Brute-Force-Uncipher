@@ -48,6 +48,7 @@ char generateCharacter( int coefficient, char originalChar )
  */
 int uncipher( int shift, FILE * inputFile )
 {
+
     FILE * outputFile = fopen( "build/unciphered", "w" ); // opens a new file to save de coded message
  
     if( outputFile == NULL )
@@ -91,38 +92,38 @@ int main( int argc, char * argv[] )
 
 	FILE * inputCipheredFile;
 
-	int shift = 1;
+	int shift = 0;
 	char is_right = 'n';
 
 	while ( is_right != 'y' && shift < 26 ) // the user should be identify what the shift is, according of the print on screen.
 											// 	if the user can't identify the shift then the program finishes with no output 
 	{
+		shift++;
 		inputCipheredFile = fopen( argv[1], "r" );
 
 		int sucess = uncipher( shift, inputCipheredFile );
-
 		if( sucess == 0 )
 		{
 			printf( ">>> Read the following file and answer the next question <<< \n");
 
-			printf( "\n>>>> Unciphered file content begin <<<\n");
+			printf( "\n>>>> Unciphered file content begin with the shift value equals to %d <<<\n", shift);
 			system( "cat build/unciphered" );
 			printf( "\n>>>> Unciphered file content end <<<\n");
 			
 			printf( "\n>>>> Is that shift the correctly? (y if yes, n in otherwise) <<<<\n" );
 			scanf( " %c", &is_right );
 		}
-
-		shift++;
 		fclose( inputCipheredFile );
 	}
 
+
 	if( shift < 26 )
 	{
-		printf( "\n>>>> The shift value is: %i <<<<\n", shift );
+		printf( "\n>>>> The final shift value is: %d <<<<\n", shift );
 	} else 
 	{
 		printf( "\n>>>> Exiting without an answer <<<<\n" );
+		
 		system( "rm build/unciphered" );
 	}
 	
