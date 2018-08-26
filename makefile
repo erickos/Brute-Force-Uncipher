@@ -9,7 +9,7 @@ CXX = gcc
 COMPILE_FLAG = -std=c11
 
 #Path
-SRC_PATH = src/simple-brute-force.c
+SRC_PATH = src/caesar_decoder.c
 
 #Executable
 BIN_NAME = ./bin/decipher
@@ -23,5 +23,5 @@ make:
 	$(CXX) -Wall $(COMPILE_FLAG) $(SRC_PATH) -o $(BIN_NAME)
 
 clean:
-	-rm -f $(BIN_NAME)
-	-rm -f $(UNCIPHER_NAME)
+	rm -rf bin/
+	rm -rf build/
